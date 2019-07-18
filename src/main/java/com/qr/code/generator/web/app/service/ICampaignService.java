@@ -8,6 +8,8 @@ public interface ICampaignService {
 	
 	public List<Campaign> findAll();
 	
+	public List<Campaign> findIsAvailable();
+	
 	public void save(Campaign campaign);
 	
 	public Campaign findOne(Long id);
@@ -18,6 +20,6 @@ public interface ICampaignService {
 
 	List<Campaign> findByOrderByTitleAsc();
 
-	List<Campaign> findByOrderByScansDesc();
+	List<Campaign> findByOrderByScansDesc();	
 
 }

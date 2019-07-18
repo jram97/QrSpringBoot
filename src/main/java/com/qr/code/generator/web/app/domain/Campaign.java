@@ -38,7 +38,7 @@ public class Campaign implements Serializable {
 	@Column(name="website")
 	private String webSite;
 	
-	@Column(name="img_qr")
+	@Column(name="img_qr", columnDefinition = "TEXT")
 	private String imgQR;
 	
 	@Temporal(TemporalType.DATE)
@@ -214,6 +214,14 @@ public class Campaign implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
+
+	@Override
+	public String toString() {
+		return "Campaign [id=" + id + ", image=" + image + ", title=" + title + ", description=" + description
+				+ ", webSite=" + webSite + ", imgQR=" + imgQR + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", isAvailable=" + isAvailable + ", branchOffice=" + branchOffice + ", scans=" + scans + "]";
+	}
+	
 	
 
 }

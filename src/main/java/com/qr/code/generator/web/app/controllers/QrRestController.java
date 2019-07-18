@@ -29,7 +29,7 @@ import com.qr.code.generator.web.app.service.ICountryService;
 import com.qr.code.generator.web.app.service.IOperatingSystemService;
 import com.qr.code.generator.web.app.service.IScanService;
 
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@CrossOrigin(origins = "http//qr.solucionesroots.com:8080", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api")
 public class QrRestController {
@@ -56,7 +56,7 @@ public class QrRestController {
 		Campaign campaign = campaignService.findOne(qrData.getId());
 		
 		if(campaign==null) {
-			return "redirect:/QRCode";
+			return "redirect:/";
 		}
 
 		try {

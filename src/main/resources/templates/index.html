@@ -152,18 +152,18 @@
 							aria-expanded="false">Filter By</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 							<button class="dropdown-item" type="button">
-								<a th:href="@{/QRCode/sort/} + ${1}" class="btn btn-outline-danger">Last Created</a>
+								<a th:href="@{/sort/} + ${1}" class="btn btn-outline-danger">Last Created</a>
 							</button>
 							<button class="dropdown-item" type="button">
-								<a th:href="@{/QRCode/sort/} + ${2}" class="btn btn-outline-danger">Name</a>
+								<a th:href="@{/sort/} + ${2}" class="btn btn-outline-danger">Name</a>
 							</button>
 							<button class="dropdown-item" type="button">
-								<a th:href="@{/QRCode/sort/} + ${3}" class="btn btn-outline-danger">Most Scanned</a>
+								<a th:href="@{/sort/} + ${3}" class="btn btn-outline-danger">Most Scanned</a>
 							</button>
 						</div>
 					</div>
 					
-					<a class="col-1.5 btn btn-success mb-3" th:href="@{/QRCode/campaign}"><b>+ CREATE QR
+					<a class="col-1.5 btn btn-success mb-3" th:href="@{/campaign}"><b>+ CREATE QR
 							CODE </b></a>
 				</div>
 				<div th:each="campaign: ${campaigns}" th:if="${campaign.title != null}">
@@ -192,7 +192,7 @@
 											
 										</p>
 									<p class="card-text">
-										<a th:href="@{/QRCode/details/} + ${campaign.id}">Details</a>
+										<a th:href="@{/details/} + ${campaign.id}">Details</a>
 									</p>
 								</div>
 								
@@ -206,7 +206,7 @@
 
 							<div class="col-md-1">
 								<p class="card-text">
-									<a th:href="@{'/QRCode/download/'+${campaign.id}}" class="btn btn-outline-primary">Download</a>
+									<a th:href="@{'/download/'+${campaign.id}}" class="btn btn-outline-primary">Download</a>
 								</p>
 							</div>
 

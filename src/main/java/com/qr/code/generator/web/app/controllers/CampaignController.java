@@ -97,7 +97,7 @@ public class CampaignController {
 		Date currentDate = new Date();
 
 		if(!foto.isEmpty()) {
-			String rootPath = "C://Temp//uploads";
+			String rootPath = "//opt//uploads";
 			try {
 				byte[] bytes = foto.getBytes();
 				Path rutaCompleta = Paths.get(rootPath + "//" + foto.getOriginalFilename());
@@ -112,7 +112,8 @@ public class CampaignController {
 		UserAdmin userAdmin = new UserAdmin();
 		userAdmin.setId((long) 1);
 		campaign.setUser(userAdmin);
-
+		campaign.setAvailable(true);
+		/*
 		try {
 			if(campaign.getEndDate().after(currentDate))
 				campaign.setAvailable(true);
@@ -120,12 +121,12 @@ public class CampaignController {
 				campaign.setAvailable(false);
 		}catch (Exception e){
 			e.printStackTrace();
-		}
+		}*/
 
 
 		campaignService.save(campaign);
 
-		return "redirect:/QRCode";
+		return "redirect:/";
 	}
 	
 	@GetMapping(value="/ver/{id}")
@@ -181,8 +182,18 @@ public class CampaignController {
 	
 	@GetMapping("/delete/{id}")
 	public String deleteCampaign(@PathVariable("id") Long id){
-		campaignService.delete(id);
-		return "redirect:/QRCode";
+		Campaign campaign = campaignService.findOne(id);
+						
+		boolean valor = campaign.getAvailable();
+
+		if(valor) {
+			campaign.setAvailable(false);
+		}else {
+			campaign.setAvailable(true);
+		}
+		campaignService.save(campaign);
+		//campaignService.delete(id);
+		return "redirect:/";
 	}
 
 }

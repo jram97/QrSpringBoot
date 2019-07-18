@@ -27,8 +27,8 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller()
-@RequestMapping("${application.name}")
+@Controller
+//@RequestMapping("${application.name}")
 public class MainController {
 
     @Autowired
@@ -49,13 +49,13 @@ public class MainController {
 	/*
 	 * Página principal que se muestra al logguearse
 	 */
-	@GetMapping({""})
+	@GetMapping({"/", "", "/home", "/index"})
 	public String mainPage(Model model, HttpServletRequest session) {
 
 		if(!session.getSession().isNew()) {
 
 			Date currentDate = new Date();
-			List<Campaign> campaigns = campaignService.findAll();
+			List<Campaign> campaigns = campaignService.findIsAvailable();
 			campaigns.forEach(campaign -> {
 				try {
 					if (campaign.getEndDate().after(currentDate))
@@ -123,6 +123,7 @@ public class MainController {
 		return "login";
 	}*/
 
+	/*
 	@GetMapping("/login")
     public String loginPage(){
 	    return "login";
@@ -150,7 +151,7 @@ public class MainController {
 	    userAdmin.setLogin(false);
 	    return "redirect:/QRCode/login";
     }
-
+*/
 	/*
 	 * Pantalla de registro
 	 */
@@ -215,7 +216,7 @@ public class MainController {
 
 		String fileName = fileVal.split(",")[1];
 
-		String folderPath = "C://Temp//uploads/"+campaign.getTitle()+".png";
+		String folderPath = "//opt//uploads/"+campaign.getTitle()+".png";
 
 		//Decodifica
 		try (FileOutputStream imageOutFile = new FileOutputStream(folderPath)) {

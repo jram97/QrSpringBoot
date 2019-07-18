@@ -59,4 +59,9 @@ public class CampaignServiceImpl implements ICampaignService {
 		return campaignDao.findByOrderByScansDesc();
 	}
 
+	@Override
+	public List<Campaign> findIsAvailable() {
+		return campaignDao.findByIsAvailable();
+	}
+
 }

@@ -1,7 +1,7 @@
 package com.qr.code.generator.web.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.jpa.repository.Query;
 
 import com.qr.code.generator.web.app.domain.Campaign;
 
@@ -15,6 +15,9 @@ public interface CampaignRepository extends JpaRepository<Campaign, Long> {
 
     List<Campaign> findByOrderByScansDesc();
 
-
+    @Query(
+    		value = "SELECT * FROM campaigns WHERE is_available = 1",
+    		nativeQuery = true)
+    List<Campaign> findByIsAvailable();
 
 }

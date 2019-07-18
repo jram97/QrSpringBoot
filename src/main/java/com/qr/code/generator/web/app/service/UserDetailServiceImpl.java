@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("UserDetailServiceImpl")
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailServiceImpl {
 /*
     @Autowired
     UserRepository userRepository;

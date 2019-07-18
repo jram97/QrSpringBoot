@@ -38,7 +38,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll().and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/QRCode/Err403");
 */
 
-        http.authorizeRequests().anyRequest().permitAll()
+        http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/vendor/**", "/images/**").permitAll()
         .anyRequest().authenticated()
 		.and()
 		    .formLogin()
