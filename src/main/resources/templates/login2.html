@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+        <script>
+            var config = {
+            apiKey: "AIzaSyBciiUVCnWM9_krqT152R-DtTnF3BPExoo",
+            authDomain: "qrbackendapp.firebaseapp.com",
+            projectId: "qrbackendapp",
+            storageBucket: "qrbackendapp.appspot.com",
+            messagingSenderId: "367523807267",
+            appId: "1:367523807267:web:daff01012851a33d"
+        }
+        firebase.initializeApp(config)
+        </script>
+
+        <script>
+            var uiConfig = {
+                signInSuccessUrl: './index.html',
+                signInOptions: [
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                ],
+            }
+                var ui = new firebaseui.auth.AuthUI(firebase.auth())
+                ui.start('#firebaseui-auth-container', uiConfig)
+        </script>
+
+    </head>
+    <body>
+        <div id="firebaseui-auth-container"></div>
+    </body>
+</html>

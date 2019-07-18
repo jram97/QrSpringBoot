@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous" />
+</head>
+<body>
+	<header></header>
+	<input type="hidden" th:value="${idcampaign}" id="idcampaign">
+
+
+	<div th:if="${campaign.available}" class="container py-4">
+	<div class=" card text-center">
+		<div class="card-header" th:text="${campaign.title}"></div>
+		<div class="card-body">
+			<p class="card-text" th:text="${campaign.description}"></p>
+			<img class="img-fluid" th:if="${#strings.length(campaign.image) > 0}" th:src="@{'/uploads/' +  ${campaign.image}}" th:alt="${campaign.image}" />
+			<p class="card-text" ><small th:text="${campaign.webSite}"></small></p>
+		</div>
+	</div>
+	</div>
+	
+
+	<div th:unless="${campaign.available}" class="container py-4">
+		<h1 class="text-center">La promoción ha expirado!, sigue apoyandonos!!!</h1>
+	</div>
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9xIAg4t2o85vJLLBwQH3wz0DH5FmBg8M&callback=initMap"
+			type="text/javascript"></script>
+			
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<script>
+		window.onload = function () {
+			
+			var city = "San Salvador";
+			var country = "El Salvador";
+			var OSName="Linux";
+			if (navigator.appVersion.indexOf("Win")!==-1) OSName="Windows";
+			if (navigator.appVersion.indexOf("Mac")!==-1) OSName="MacOS";
+			if (navigator.appVersion.indexOf("X11")!==-1) OSName="UNIX";
+			if (navigator.appVersion.indexOf("Linux")!==-1) OSName="Linux";
+			
+			function obtener(){navigator.geolocation.getCurrentPosition(mostrar, gestionarErrores);}
+			function mostrar(posicion){
+				alert("Latitud: "+posicion.coords.latitude);
+				alert("Longitud: "+posicion.coords.longitude);
+				alert("Exactitud: "+posicion.coords.accuracy);
+			}
+
+			function gestionarErrores(error){
+				alert('Error: '+error.code+' '+error.message+ '\n\nPor favor compruebe que está conectado '+
+				'a internet y habilite la opción permitir compartir ubicación física');
+			}
+			
+			async function enviarDatos(){
+				data = {
+						id: document.querySelector("#idcampaign").value,
+	                    city: "San Salvador",
+	                    country: "El Salvador",
+	                    osname: OSName, 
+	            }
+				
+				let res = 0, response, url = "/api/ver";
+			    try {
+			        response = await axios.post(url, data);
+			        console.log(response);
+			    } catch (error) {
+			        console.log(error)
+			    }
+			    return res;
+			}
+			
+			enviarDatos();
+			
+
+			
+
+			/*
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(
+						function success(position) {
+							var lat = position.coords.latitude;
+							var lng = position.coords.longitude;
+
+							var latlng = new google.maps.LatLng(lat, lng);
+							var geocoder = new google.maps.Geocoder();
+							geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+								if (status !== google.maps.GeocoderStatus.OK) {
+									alert(status);
+								}
+								if (status === google.maps.GeocoderStatus.OK) {
+									var address = (results[0].formatted_address);
+
+									city = address.split(",").reverse()[1];
+									country = address.split(",").pop();
+
+								}
+							});
+
+						},
+						function error(error_message) {
+								alert("Ha ocurrido un Error!")
+						}
+				)
+			}else{
+
+			}
+			*/
+		}
+
+	</script>
+
+</body>
+</html>

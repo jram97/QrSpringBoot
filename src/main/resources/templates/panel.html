@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <!--Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link type="text/css" rel="stylesheet" th:href="@{/stylespublic/dashboard.css}">
+
+    <title>DashBoard</title>
+</head>
+<body class="p-2 px-4 bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light"  style="background-color: #c4c6c9;">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/burgerMenu.png}" class="d-inline-block align-center" width="60" height="60" alt="">
+            MENU
+        </a>
+    </nav>
+
+    <div class="d-flex flex-row justify-content-between h-100">
+        <div class="col-md-2 col-sm-6 shadow rounded mt-0 mb-5 bg-white mr-0 flex-column py-0 px-0">
+            <!--DashBoard-->
+            <div style="background-color: #05507b; height: 111px;">
+                <button type="button" class="btn  btn-block"  href="#">
+                    <img th:src="@{/images/burgerMenu.png}" class="d-inline-block align-center" width="60" height="60" alt="">
+                </button>
+            </div>
+            <!--Usuario-->
+            <div style="background-color: #05507b; height: 111px;">
+                <button type="button" class="btn  btn-block"  href="#">
+                    <img th:src="@{/images/burgerMenu.png}" class="d-inline-block align-center" width="60" height="60" alt="">
+                </button>
+            </div>
+            <!--Paises-->
+            <div style="background-color: #05507b; height: 111px;">
+                    <button type="button" class="btn  btn-block"  href="#">
+                        <img th:src="@{/images/burgerMenu.png}" class="d-inline-block align-center" width="60" height="60" alt="">
+                    </button>
+            </div>
+            <!--Anuncios-->
+            <div style="background-color: #05507b; height: 111px;">
+                    <button type="button" class="btn  btn-block"  href="#">
+                        <img th:src="@{/images/burgerMenu.png}" class="d-inline-block align-center" width="60" height="60" alt="">
+                    </button>
+            </div>
+            <!--Configuracion-->
+            <div style="background-color: #05507b; height: 111px;">
+                    <button type="button" class="btn  btn-block"  href="#">
+                        <img th:src="@{/images/burgerMenu.png}" class="d-inline-block align-center" width="60" height="60" alt="">
+                    </button>
+            </div>
+            <!--Ayuda-->
+            <div style="background-color: #05507b; height: 111px;">
+                    <button type="button" class="btn  btn-block"  href="#">
+                        <img th:src="@{/images/burgerMenu.png}" class="d-inline-block align-center" width="60" height="60" alt="">
+                    </button>
+            </div>
+        </div>
+
+        <!--Segunda card-->
+        <div class="col-md-10 col-sm-5 shadow rounded mt-0 mb-5 bg-white mr-3 flex-column py-0 px-0">
+            <div style="float: left; height: 45%; width: 25%;">
+                <p style="text-align: center; padding: 70px 0">
+                    Oferta Vip de Mc Donalds
+                    Mayo 27,2019    Estadisticas
+                    150
+                </p>
+            </div>
+            <div style="float: left; height: 45%; width: 25%;">
+                <img th:src="@{/images/qr.png}" style="margin: 15%; width: 70%; height: 70%;">
+                </div> 
+                <div style="float: left; height: 45%; width: 25%;">
+                    <img th:src="@{/images/promocion.png}" style="margin: 15%; width: 70%; height: 70%;">
+                </div> 
+                <div style="float: left; height: 45%; width: 25%;">
+                    <button style="background-color: #5fbcff; color:white; margin-top: 70%; margin-left: 25%;" href="#" class="btn shadow">Aceptar y Generar</button>
+                </div>
+                <div style="border: 1px solid #5fbcff; margin-top: 25%; margin-left: 5%; margin-right: 5%;"></div> 
+          </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

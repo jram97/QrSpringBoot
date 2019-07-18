@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#000000" />
+<!--Bootstrap CSS CDN -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<link rel="stylesheet" th:href="@{/css/estilos.css}" />
+
+<title>QR</title>
+</head>
+
+<body class="p-2 px-3 bg-light">
+	<div id="root"></div>
+
+
+	<!-- Primera Card -->
+	<div class="d-flex flex-row justify-content-between h-100">
+
+		<div
+			class="col-md-7 col-sm-6 shadow rounded mt-4 mb-5 bg-white mr-2 flex-column py-3 px-5">
+
+			<h6>Para generar un QR de promocion, seleccione el banner o
+				flyer desde su galería de imágenes</h6>
+				
+			<p>Camapaña N <b></b></p>
+			<br>
+
+
+
+			<!-- Formulario comercio y sucursal -->
+			<div>
+				<form id="campaign" th:action="@{/campaign/create}"
+					th:object="${campaign}" enctype="multipart/form-data" method="post">
+					<div class="row mb-3">
+						<div class="col">
+							<label for="InputComercio">Asignar comercio</label> <a href="#"
+								class="btn btn-secondary btn-sm btn-abrir-popup"
+								id="btn-abrir-popup">+</a> <select id="comercio"
+								th:name="idCommerce" class="form-control" style="width: 350px">
+								<option th:each="comercio: ${shops}"
+									th:if="${comercio.name != null}" th:value="${comercio.id}"
+									th:text="${comercio.name}"></option>
+							</select>
+						</div>
+						<div class="col">
+							<label for="title">Título</label>
+							<input th:field="*{title}" id="title" class="form-control" type="text" />
+						</div>
+
+					</div>
+					<div class="row mb-3">
+						<div class="col">
+							<label for="InputComercio">Asignar sucursal</label> <a href="#"
+								class="btn btn-secondary btn-sm btn-abrir-popup"
+								id="btn-abrir-popup1">+</a> <select id="sucursal"
+								th:name="idBranchOffice" class="form-control"
+								style="width: 350px">
+								<option th:each="branchOffice: ${branchOffices}"
+									th:if="${branchOffice.name != null}"
+									th:value="${branchOffice.id}" th:text="${branchOffice.name}">Centro
+									comercial sur</option>
+							</select>
+						</div>
+						<div class="col">
+							<label for="description">Descripción</label>
+							<input id="desc" th:field="*{description}" class="form-control" type="text" />
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col">
+							<label for="file">Subir Imagen</label> <input
+								class="form-control" style="width: 350px" th:name="file"
+								type="file" id="img-uploader" />
+							
+						</div>
+						<div class="col">
+							<label for="web-site">Sitio Web</label>
+							<input id="website" th:field="*{webSite}" class="form-control" type="text" />
+						</div>
+
+					</div>
+					<div class="row mb-3">
+						<div class="col">
+							<label for="startDate">Fecha Inicio</label> <input
+								class="form-control" style="width: 350px"
+								th:field="*{startDate}" type="date" />
+						</div>
+						<div class="col">
+							<label for="endDate">Fecha Fin</label> <input
+								class="form-control" style="width: 350px" th:field="*{endDate}"
+								type="date" />
+						</div>
+					</div>
+					<div class="row mb-3 justify-content-center">
+
+                        <input th:field="*{imgQR}" id="imgQR" class="form-control" type="hidden" />
+
+                        <input type="button" onclick="invokeQR()" value="Generar" class="btn btn-info shadow mx-5"/>
+
+						<input type="submit" id="botonenviar" class="btn btn-success shadow" value="Guardar">
+						<input type="hidden" th:value="${sizes}" id="idSizes">
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+		<!-- Segunda Card -->
+		<div
+			class="col-md-5 col-sm-4 shadow rounded mt-4 mb-5 bg-white ml-2 d-flex justify-content-center align-items-center">
+			<div id="placeHolder" ></div>
+		</div>
+
+	</div>
+
+
+
+	<div class="container">
+		<div class="overlay" id="overlay">
+			<div class="popup" id="popup">
+				<a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i
+					class="fas fa-times"></i></a>
+				<h3>Agregar Comercio</h3>
+				<form th:action="@{/commerce/create}" th:object="${commerce}"
+					method="POST">
+					<div class="contenedor-inputs">
+						<input type="text" th:field="*{name}" placeholder="Nombre" />
+					</div>
+					<input type="submit" class="btn-submit" value="Registrar" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="overlay" id="overlay1">
+			<div class="popup" id="popup1">
+				<a href="#" id="btn-cerrar-popup1" class="btn-cerrar-popup"><i
+					class="fas fa-times"></i></a>
+				<h3>Agregar Sucursal</h3>
+				<form th:action="@{/branch-office/create}"
+					th:object="${branchOffice}" method="POST">
+					<div class="contenedor-inputs">
+						<input type="text" th:field="*{name}" placeholder="Nombre" />
+					</div>
+					<input type="submit" class="btn-submit" value="Registrar" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" th:src="@{/js/qrcode.js}"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" th:src="@{/js/invokeQR.js}"></script>
+
+
+	<script th:src="@{/js/popup.js}"></script>
+
+	<script type='text/javascript'>
+
+        $(document).ready(function() { // Esta parte del código se ejecutará automáticamente cuando la página esté lista.
+
+			$("#botonenviar").click(function() { // Con esto establecemos la acción por defecto de nuestro botón de enviar.
+
+                $("#imgQR").val($("#placeHolder").find('img').attr('src'));
+
+
+				$.post("/campaign/create", $("#campaign").serialize(), function(res) {
+					if(res == 1){
+						alert("exito");
+					}else{
+						alert("fracaso");
+					}
+				});
+
+			});
+		});
+
+		/*
+			$("#comercio").change(function(e) {
+				e.preventDefault();
+				$.ajax({
+					url : "campaign/commercexbranchoffice",
+					data : "comercio=" + $('#comercio').val(),
+					type : 'POST',
+					success : function(result) {
+
+						$('#sucursal').html(result);
+
+					}
+				});
+			});
+
+			   	$("#campaign").on('submit', function (e) {
+					e.preventDefault();
+					$.ajax(
+						{
+							url: "campaign",
+							data:  $("#formulario").serialize(),
+							type: 'POST',
+							success: function (result) {
+
+								alert('todo bien');
+
+							},
+							error: function (xhr) {
+								swal("Campos inválidos, por favor intente nuevamente", {
+						 	    	icon: "error",
+				 		   		});
+				 		   		alert('Error');
+							}
+						});
+				});
+		 */
+	</script>
+
+</body>
+</html>

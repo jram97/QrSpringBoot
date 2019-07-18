@@ -1,0 +1,76 @@
+CREATE TABLE SHOPS(
+	id serial primary key,
+	commerce varchar(255)
+);
+
+CREATE TABLE BRANCH_OFFICES(
+	id serial primary key,
+	branch_office varchar(255),
+	id_commerce int
+);
+
+CREATE TABLE CAMPAIGNS(
+	id serial primary key,
+	image varchar(255),
+	title varchar(255),
+	description varchar(255),
+	website varchar(255),
+	img_qr varchar(255),
+	start_date date,
+	end_date date,
+	id_branch_office integer
+);
+
+CREATE TABLE SCANS(
+	id serial primary key,
+	scan_date date,
+	id_campaign integer,
+	id_operating_system integer,
+	id_city integer
+);
+
+CREATE TABLE OPERATING_SYSTEMS(
+	id serial primary key,
+	os_name varchar(255)
+);
+
+CREATE TABLE CITIES(
+	id serial primary key,
+	city varchar(255),
+	id_country integer
+);
+
+CREATE TABLE COUNTRIES(
+	id serial primary key,
+	country varchar(255)
+);
+
+ALTER TABLE BRANCH_OFFICES
+ADD CONSTRAINT FK_SHOPS
+FOREIGN KEY (id_commerce)
+REFERENCES SHOPS(id);
+
+ALTER TABLE CAMPAIGNS
+ADD CONSTRAINT FK_BRANCH_OFFICES
+FOREIGN KEY (id_branch_office)
+REFERENCES BRANCH_OFFICES(id);
+
+ALTER TABLE SCANS
+ADD CONSTRAINT FK_CAMPAIGNS
+FOREIGN KEY (id_campaign)
+REFERENCES CAMPAIGNS(id);
+
+ALTER TABLE SCANS
+ADD CONSTRAINT FK_CITIES
+FOREIGN KEY (id_city)
+REFERENCES CITIES(id);
+
+ALTER TABLE SCANS
+ADD CONSTRAINT FK_OPERATING_SYSTEM
+FOREIGN KEY (id_operating_system)
+REFERENCES OPERATING_SYSTEMS(id);
+
+ALTER TABLE CITIES
+ADD CONSTRAINT FK_COUNTRIES
+FOREIGN KEY (id_country)
+REFERENCES COUNTRIES(id);
